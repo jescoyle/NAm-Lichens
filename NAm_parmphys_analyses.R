@@ -119,6 +119,27 @@ for(s in scales){
 }
 dev.off()
 
+# Single map
+this_rich = subset(richness_sp, radius==250)
+pdf('./Maps/parm richness 100 records 250km radius.pdf', height=6, width=6, bg='transparent')
+spplot(this_rich, 'S100_parm',  main='', panel=function(x,y,subscripts,...){
+	panel.pointsplot(x,y,...)
+	sp.polygons(nam_laea, fill='transparent', col="#4c4c4ccc")
+	
+	#SpatialPolygonsRescale(layout.scale.bar(), offset = c(1500,-2500), 
+	#	scale = 1000, fill=c("transparent","black"))
+	#sp.text(c(1500,-2700), "0")
+	#sp.text(c(2500,-2700), "1000")
+	#sp.text(c(2000,-2200), "km")
+	#sp.text(c(-4500,4500), paste('Radius =',s,'km'))
+		
+}, cuts=colcuts, cex=0.6, pch=15, col.regions = mycolramp, auto.key=F#,
+#key=list(x=.1,y=.5, corner=c(0,.5), title='Species\nRichness',
+#	rectangles=list(col=mycolramp, size=3, border='transparent'),
+#	text=list(c(paste(colcuts[1],colcuts[2], sep='-'), paste((colcuts+1)[2:(ncuts)], colcuts[2:ncuts+1], sep='-'))))
+)
+dev.off()
+
 # Map for physciaceae, nsamp=100
 colcuts = seq(1,73,8)
 ncuts=length(colcuts) - 1
